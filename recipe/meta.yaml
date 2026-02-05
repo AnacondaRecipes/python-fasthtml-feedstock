@@ -9,15 +9,13 @@ source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name|replace('-', '_') }}/{{ name|replace('-', '_') }}-{{ version }}.tar.gz
   sha256: 5cfeb7d37a72cf59cbb1e328fa1f29dbdc428e8f8d5a7c41d9bb8d5443047e7b
 
-
 build:
   number: 0
   skip: true  # [py<310]
   script: {{ PYTHON }} -m pip install --no-deps --no-build-isolation . -vv
-  python:
-    entry_points:
-      - fh_railway_link = fasthtml.cli:railway_link
-      - fh_railway_deploy = fasthtml.cli:railway_deploy
+  entry_points:
+    - fh_railway_link = fasthtml.cli:railway_link
+    - fh_railway_deploy = fasthtml.cli:railway_deploy
 
 requirements:
   host:
