@@ -1,9 +1,6 @@
 {% set name = "python-fasthtml" %}
 {% set version = "0.14.13" %}
-{% set deselect_tests = "--deselect=tests/test_toaster.py::test_get_toaster_with_typehint" %}
 
-# >       assert 'Toast get' in res.text
-# E       assert 'Toast get' in ' <!doctype html>\n <html>\n   <head>\n
 package:
   name: {{ name }}
   version: {{ version }}
@@ -25,23 +22,22 @@ requirements:
     - python
     - pip
     - setuptools >=64
-    - wheel
   run:
     - python
-    - fastcore >=1.10.0
+    - fastcore >=2.2.7
     - python-dateutil
-    - starlette >0.33
+    - starlette >=1.0.1
     - oauthlib
     - itsdangerous
     # https://github.com/AnswerDotAI/fasthtml/blob/0.12.40/CHANGELOG.md?plain=1#L21
-    - uvicorn >=0.39
-    - httpx
-    - fastlite >=0.1.1
+    - uvicorn >=0.30
+    - httpx2
     - python-multipart
     - beautifulsoup4
-    <conda_recipe_manager.types.SentinelType object at 0x7f7984026270>:  # def test_get_toaster_with_typehint():
-      # res = cli.get('/see-toast-with-typehint', follow_redirects=False)
 
+# >       assert 'Toast get' in res.text
+# E       assert 'Toast get' in ' <!doctype html>\n <html>\n   <head>\n
+{% set deselect_tests = "--deselect=tests/test_toaster.py::test_get_toaster_with_typehint" %}
 test:
   source_files:
     - tests
@@ -52,7 +48,7 @@ test:
     - pytest
   commands:
     - pip check
-    - pytest -v tests {{ deselect_tests }}
+    - pytest -vv tests {{ deselect_tests }}
     - fh_railway_link --help
     - fh_railway_deploy --help
 
