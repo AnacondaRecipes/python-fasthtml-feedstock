@@ -1,5 +1,5 @@
 {% set name = "python-fasthtml" %}
-{% set version = "0.12.40" %}
+{% set version = "0.14.13" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name|replace('-', '_') }}/{{ name|replace('-', '_') }}-{{ version }}.tar.gz
-  sha256: 5cfeb7d37a72cf59cbb1e328fa1f29dbdc428e8f8d5a7c41d9bb8d5443047e7b
+  sha256: fbdef364d3824f5db2f40e0884b4541f00b2d7ec925e5e1e62949b2ede7daf5d
 
 build:
   number: 0
@@ -22,27 +22,22 @@ requirements:
     - python
     - pip
     - setuptools >=64
-    - wheel
   run:
     - python
-    - fastcore >=1.10.0
+    - fastcore >=2.2.7
     - python-dateutil
-    - starlette >0.33
+    - starlette >=1.0.1
     - oauthlib
     - itsdangerous
     # https://github.com/AnswerDotAI/fasthtml/blob/0.12.40/CHANGELOG.md?plain=1#L21
-    - uvicorn >=0.39
-    - httpx
-    - fastlite >=0.1.1
+    - uvicorn >=0.30
+    - httpx2
     - python-multipart
     - beautifulsoup4
 
-    # def test_get_toaster_with_typehint():
-        # res = cli.get('/see-toast-with-typehint', follow_redirects=False)
 # >       assert 'Toast get' in res.text
-# E       assert 'Toast get' in ' <!doctype html>\n <html>\n   <head>\n 
+# E       assert 'Toast get' in ' <!doctype html>\n <html>\n   <head>\n
 {% set deselect_tests = "--deselect=tests/test_toaster.py::test_get_toaster_with_typehint" %}
-
 test:
   source_files:
     - tests
@@ -53,7 +48,7 @@ test:
     - pytest
   commands:
     - pip check
-    - pytest -v tests {{ deselect_tests }}
+    - pytest -vv tests {{ deselect_tests }}
     - fh_railway_link --help
     - fh_railway_deploy --help
 
